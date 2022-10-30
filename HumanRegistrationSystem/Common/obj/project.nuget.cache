@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "EXysmFrPWF3Td1E3A2gEFazKZdEIuZJYcocm8PyKhgr18ceZPxGXo2Yyo6xcj0sMHLNpyHHm6rFE6GhzZmvtlw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Greta\\Documents\\GitHub\\FinalExam\\HumanRegistrationSystem\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Greta\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\Greta\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\Greta\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,12 @@
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\bin\Debug\net6.0\HumanRegistrationSystem_Domain.deps.json
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\bin\Debug\net6.0\HumanRegistrationSystem_Domain.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\bin\Debug\net6.0\HumanRegistrationSystem_Domain.pdb
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\HumanRegistrationSystem_Domain.csproj.AssemblyReference.cache
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\HumanRegistrationSystem_Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\HumanRegistrationSystem_Domain.AssemblyInfoInputs.cache
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\HumanRegistrationSystem_Domain.AssemblyInfo.cs
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\HumanRegistrationSystem_Domain.csproj.CoreCompileInputs.cache
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\HumanRegistrationSystem_Domain.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\refint\HumanRegistrationSystem_Domain.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\HumanRegistrationSystem_Domain.pdb
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_Domain\obj\Debug\net6.0\ref\HumanRegistrationSystem_Domain.dll

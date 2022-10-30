@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "eGQCV72yedHSs9ph9gaQQoXJClGd1J2JuaxTxKlvBqtY4TJFcnOSZkINq8W1z1VAM0A3e4leRQjyXvQs+ZNkwg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Greta\\Documents\\GitHub\\FinalExam\\HumanRegistrationSystem\\DTO\\DTO.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Greta\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\Greta\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\Greta\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

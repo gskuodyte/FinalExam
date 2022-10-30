@@ -1,0 +1,17 @@
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\bin\Debug\net6.0\HumanRegistrationSystem_DAL.deps.json
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\bin\Debug\net6.0\HumanRegistrationSystem_DAL.runtimeconfig.json
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\bin\Debug\net6.0\HumanRegistrationSystem_DAL.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\bin\Debug\net6.0\HumanRegistrationSystem_DAL.pdb
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\bin\Debug\net6.0\HumanRegistrationSystem_Domain.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\bin\Debug\net6.0\HumanRegistrationSystem_Domain.pdb
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.csproj.AssemblyReference.cache
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.AssemblyInfoInputs.cache
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.AssemblyInfo.cs
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.csproj.CoreCompileInputs.cache
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.csproj.CopyComplete
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\refint\HumanRegistrationSystem_DAL.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.pdb
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\HumanRegistrationSystem_DAL.genruntimeconfig.cache
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem_DAL\obj\Debug\net6.0\ref\HumanRegistrationSystem_DAL.dll
