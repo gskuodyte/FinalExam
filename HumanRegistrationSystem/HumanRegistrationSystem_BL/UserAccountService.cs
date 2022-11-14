@@ -15,37 +15,37 @@ namespace HumanRegistrationSystem_BL
             _dbRepository = dbRepository;
         }
         
-        public async Task<bool> CreateUserAccountAsync(string userName, string password, HumanDto human, AddressDto address, Image image)
+        public async Task<bool> CreateUserAccountAsync(SignUpDto signUpDto, byte[] Picture)
         {
-            var existingUser = await _dbRepository.GetAccountByUserNameAsync(userName);
+            var existingUser = await _dbRepository.GetAccountByUserNameAsync(signUpDto.UserName);
             if (existingUser != null)
             {
                 return false;
             }
 
-            var (hash, salt) = CreatePasswordHash(password);
+            var (hash, salt) = CreatePasswordHash(signUpDto.Password);
 
             var newUser = new UserAccount
             {
-                UserName = userName,
+                UserName = signUpDto.UserName,
                 PasswordHash = hash,
                 PasswordSalt = salt,
                 Role = "User",
-                Human = new Human
+                HumanInfo = new HumanInfo
                 {
-                    Name = human.Name,
-                    Surname = human.Surname,
-                    PersonalID = human.PersonalID,
-                    TelephoneNumber = human.TelephoneNumber,
-                    Email = human.Email,
-                    Image = image,
+                    Name = signUpDto.Name,
+                    Surname = signUpDto.Surname,
+                    PersonalID = signUpDto.PersonalID,
+                    PhoneNumber = signUpDto.PhoneNumber,
+                    Email = signUpDto.Email,
+                    Picture = Picture,
 
                     Address = new Address
                     {
-                        City = address.City,
-                        Street = address.Street,
-                        HouseNumber = address.HouseNumber,
-                        ApartmentNumber = address.ApartmentNumber
+                        City = signUpDto.Address.City,
+                        Street = signUpDto.Address.Street,
+                        HouseNumber = signUpDto.Address.HouseNumber,
+                        ApartmentNumber = signUpDto.Address.ApartmentNumber
                     }
                 }
             };
@@ -88,6 +88,168 @@ namespace HumanRegistrationSystem_BL
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
             return computedHash.SequenceEqual(passwordHash);
+        }
+
+        public async Task<bool> UpdateUserPersonalId(int id, int personalId)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+           
+            user.Result.HumanInfo.PersonalID = personalId;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserName(int id, string name)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Name = name;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserSurname(int id, string surname)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Surname = surname;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserPhoneNumber(int id, string phoneNumber)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.PhoneNumber = phoneNumber;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserEmail(int id, string email)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Email = email;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateImageAsync(int id, byte[] picture)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Picture = picture;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserCityAddress(int id, string city)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Address.City = city;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserStreetAddress(int id, string street)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Address.Street = street;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserHouseNumberAddress(int id, int houseNumber)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Address.HouseNumber = houseNumber;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateUserApartmentNumberAddress(int id, int apartmentNumber)
+        {
+            var user = _dbRepository.GetUserByIdAsync(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Result.HumanInfo.Address.ApartmentNumber = apartmentNumber;
+            await _dbRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<UserAccount> GetUserById(int id)
+        {
+            var user = await _dbRepository.GetUserByIdAsync(id);
+
+            return user;
+        }
+
+        public async Task DeleteUser(UserAccount userAccount)
+        {
+            await _dbRepository.DeleteUser(userAccount);
         }
     }
 }

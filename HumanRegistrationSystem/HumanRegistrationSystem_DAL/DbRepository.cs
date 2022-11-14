@@ -1,10 +1,5 @@
 ﻿using HumanRegistrationSystem_Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HumanRegistrationSystem_DAL
 {
@@ -18,7 +13,7 @@ namespace HumanRegistrationSystem_DAL
         }
         public async Task<UserAccount?> GetAccountByUserNameAsync(string username)
         {
-            return await _context.UserAccounts.SingleOrDefaultAsync(u => u.UserName == username);
+            return await _context.UserAccounts.Include(h => h.HumanInfo).Include(a => a.HumanInfo.Address).SingleOrDefaultAsync(u => u.UserName == username);
         }
 
         public async Task InsertAccountAsync(UserAccount userAccount)
@@ -26,20 +21,30 @@ namespace HumanRegistrationSystem_DAL
             await _context.UserAccounts.AddAsync(userAccount);
         }
 
-        public async Task SaveChangesAsync()
+        public Task SaveChangesAsync()
         {
-            await _context.SaveChangesAsync();
+             return _context.SaveChangesAsync();
         }
 
-        public async Task AddImageAsync(Image image)
+        public async Task<UserAccount> GetUserByIdAsync(int id)
         {
-            await _context.Images.AddAsync(image);
+            return await _context.UserAccounts.Include(h => h.HumanInfo).Include(a => a.HumanInfo.Address).FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<Image> GetImageAsync(int id)
+        public async Task DeleteUser(UserAccount userAccount)
         {
-            return await _context.Images.FirstOrDefaultAsync(i => i.Id == id);
             
+            _context.UserAccounts.Remove(userAccount);
+            
+            await SaveChangesAsync();
         }
+
+
+        //public async Task Update<T>(T item) where T : class
+        //{
+        //    _context.Update(item);
+        //    await SaveChangesAsync();
+        //}
     }
+
 }

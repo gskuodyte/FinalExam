@@ -17,6 +17,7 @@ namespace HumanRegistrationSystem_Domain
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Role { get; set; }
-        public Human Human { get; set; }
+        [InverseProperty("UserAccount")]
+        public virtual HumanInfo HumanInfo { get; set; }
     }
 }

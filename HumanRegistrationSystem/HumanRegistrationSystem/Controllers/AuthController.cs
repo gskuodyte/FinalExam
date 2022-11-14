@@ -1,35 +1,31 @@
 ﻿
 using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HumanRegistrationSystem.Controllers
 {
     [Route("api/[controller]")]
-    //[ApiController]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IUserAccountService _userAccountService;
         private readonly IJwtService _jwtService;
-        private readonly IImagesService _imagesService;
 
-        public AuthController(IUserAccountService userAccountsService, IJwtService jwtService, IImagesService imagesService)
+        public AuthController(IUserAccountService userAccountsService, IJwtService jwtService)
         {
             _userAccountService = userAccountsService;
             _jwtService = jwtService;
-            _imagesService = imagesService;
         }
 
         [HttpPost("Signup")]
         public async Task<IActionResult> Signup(SignUpDto signupDto)
         {
-            using var memoryStream = new MemoryStream();
-            signupDto.Human.Image.CopyTo(memoryStream);
-            var imageBytes = memoryStream.ToArray();
+            var humanInfoDto = new HumanInfoDto();
+            humanInfoDto.SetProfilePicture(signupDto.Picture);
 
-            var savedImage = await _imagesService.AddImageAsync(imageBytes, signupDto.Human.Image.ContentType);
-
-            var success = await _userAccountService.CreateUserAccountAsync(signupDto.UserName, signupDto.Password, signupDto.Human, signupDto.Human.Address, savedImage);
+            var success = await _userAccountService.CreateUserAccountAsync(signupDto, humanInfoDto.Picture);
 
             return success ? Ok() : BadRequest(new { ErrorMessage = "User already exist" });
         }

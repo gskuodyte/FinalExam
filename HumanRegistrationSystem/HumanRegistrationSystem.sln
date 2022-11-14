@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D26C0E45
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic_UniTests", "BusinessLogic_UniTests\BusinessLogic_UniTests.csproj", "{8797A0D8-3DD8-4B20-8BBE-2B0FF99F8AD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{08FAAB1A-930A-43B3-9AEF-BF10850C8254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{08FAAB1A-930A-43B3-9AEF-BF10850C8254}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{DA6F9680-8817-4B4C-B723-80BF6D4DB724}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{DA6F9680-8817-4B4C-B723-80BF6D4DB724}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

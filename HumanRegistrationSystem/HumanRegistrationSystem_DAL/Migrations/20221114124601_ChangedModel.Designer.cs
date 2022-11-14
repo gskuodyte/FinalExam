@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HumanRegistrationSystem_DAL.Migrations
 {
     [DbContext(typeof(HumanRegistrationSystemDbContext))]
-    [Migration("20221030144621_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221114124601_ChangedModel")]
+    partial class ChangedModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,8 +29,6 @@ namespace HumanRegistrationSystem_DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("ApartmentNumber")
                         .HasColumnType("int");
@@ -51,23 +49,15 @@ namespace HumanRegistrationSystem_DAL.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("HumanRegistrationSystem_Domain.Human", b =>
+            modelBuilder.Entity("HumanRegistrationSystem_Domain.HumanInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -76,41 +66,21 @@ namespace HumanRegistrationSystem_DAL.Migrations
                     b.Property<int>("PersonalID")
                         .HasColumnType("int");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Picture")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TelephoneNumber")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Humans");
-                });
-
-            modelBuilder.Entity("HumanRegistrationSystem_Domain.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("ImageBytes")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("HumanRegistrationSystem_Domain.UserAccount", b =>
@@ -120,9 +90,6 @@ namespace HumanRegistrationSystem_DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("HumanId")
-                        .HasColumnType("int");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -142,39 +109,41 @@ namespace HumanRegistrationSystem_DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HumanId");
-
                     b.ToTable("UserAccounts");
                 });
 
-            modelBuilder.Entity("HumanRegistrationSystem_Domain.Human", b =>
+            modelBuilder.Entity("HumanRegistrationSystem_Domain.Address", b =>
                 {
-                    b.HasOne("HumanRegistrationSystem_Domain.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
+                    b.HasOne("HumanRegistrationSystem_Domain.HumanInfo", "HumanInfo")
+                        .WithOne("Address")
+                        .HasForeignKey("HumanRegistrationSystem_Domain.Address", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HumanRegistrationSystem_Domain.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
+                    b.Navigation("HumanInfo");
+                });
+
+            modelBuilder.Entity("HumanRegistrationSystem_Domain.HumanInfo", b =>
+                {
+                    b.HasOne("HumanRegistrationSystem_Domain.UserAccount", "UserAccount")
+                        .WithOne("HumanInfo")
+                        .HasForeignKey("HumanRegistrationSystem_Domain.HumanInfo", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Address");
+                    b.Navigation("UserAccount");
+                });
 
-                    b.Navigation("Image");
+            modelBuilder.Entity("HumanRegistrationSystem_Domain.HumanInfo", b =>
+                {
+                    b.Navigation("Address")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HumanRegistrationSystem_Domain.UserAccount", b =>
                 {
-                    b.HasOne("HumanRegistrationSystem_Domain.Human", "Human")
-                        .WithMany()
-                        .HasForeignKey("HumanId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.Navigation("HumanInfo")
                         .IsRequired();
-
-                    b.Navigation("Human");
                 });
 #pragma warning restore 612, 618
         }

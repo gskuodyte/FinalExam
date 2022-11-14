@@ -49,7 +49,6 @@ builder.Services.AddDbContext<HumanRegistrationSystemDbContext>(options =>
 builder.Services.AddScoped<IDbRepository, DbRepository>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<IImagesService, ImagesService>();
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -64,6 +63,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     });
 
+builder.Services.AddAuthorizationCore();
 
 var app = builder.Build();
 

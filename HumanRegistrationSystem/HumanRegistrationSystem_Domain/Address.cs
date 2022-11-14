@@ -10,6 +10,11 @@ namespace HumanRegistrationSystem_Domain
 {
     public class Address
     {
+        public Address()
+        {
+            
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -17,5 +22,8 @@ namespace HumanRegistrationSystem_Domain
         public string Street { get; set; }
         public int HouseNumber { get; set; }
         public int ApartmentNumber { get; set; }
+        [ForeignKey("Id")]
+        [InverseProperty("Address")]
+        public virtual HumanInfo HumanInfo { get; set; }
     }
 }
