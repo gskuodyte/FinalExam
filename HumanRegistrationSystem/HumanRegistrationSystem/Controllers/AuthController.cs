@@ -1,4 +1,5 @@
 ﻿
+using System.Drawing;
 using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
@@ -22,10 +23,9 @@ namespace HumanRegistrationSystem.Controllers
         [HttpPost("Signup")]
         public async Task<IActionResult> Signup(SignUpDto signupDto)
         {
-            var humanInfoDto = new HumanInfoDto();
-            humanInfoDto.SetProfilePicture(signupDto.Picture);
+            var image = _userAccountService.FileUpload(signupDto.Picture, 200, 200);
 
-            var success = await _userAccountService.CreateUserAccountAsync(signupDto, humanInfoDto.Picture);
+            var success = await _userAccountService.CreateUserAccountAsync(signupDto, image.Result);
 
             return success ? Ok() : BadRequest(new { ErrorMessage = "User already exist" });
         }

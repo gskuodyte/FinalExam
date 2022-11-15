@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Drawing;
+using Microsoft.AspNetCore.Http;
 using System.Net.Mime;
 
 namespace HumanRegistrationSystem.Dto
@@ -10,8 +11,8 @@ namespace HumanRegistrationSystem.Dto
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public byte[] Picture { get; private set; }
-        public string? ContentType { get; private set; }
+        public byte[] Picture { get; set; }
+        public string? ContentType { get; set; }
        
         public AddressDto Address { get; set; }
 

@@ -1,8 +1,15 @@
-﻿using HumanRegistrationSystem.Dto;
+﻿using DTO;
+using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_DAL;
 using HumanRegistrationSystem_Domain;
 using System.Security.Cryptography;
 using System.Text;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using static System.Net.Mime.MediaTypeNames;
+using Image = System.Drawing.Image;
+using Microsoft.AspNetCore.Http;
 
 namespace HumanRegistrationSystem_BL
 {
@@ -14,8 +21,8 @@ namespace HumanRegistrationSystem_BL
         {
             _dbRepository = dbRepository;
         }
-        
-        public async Task<bool> CreateUserAccountAsync(SignUpDto signUpDto, byte[] Picture)
+
+        public async Task<bool> CreateUserAccountAsync(SignUpDto signUpDto, byte[] picture)
         {
             var existingUser = await _dbRepository.GetAccountByUserNameAsync(signUpDto.UserName);
             if (existingUser != null)
@@ -24,6 +31,7 @@ namespace HumanRegistrationSystem_BL
             }
 
             var (hash, salt) = CreatePasswordHash(signUpDto.Password);
+            
 
             var newUser = new UserAccount
             {
@@ -38,7 +46,7 @@ namespace HumanRegistrationSystem_BL
                     PersonalID = signUpDto.PersonalID,
                     PhoneNumber = signUpDto.PhoneNumber,
                     Email = signUpDto.Email,
-                    Picture = Picture,
+                    Picture = picture,
 
                     Address = new Address
                     {
@@ -98,7 +106,7 @@ namespace HumanRegistrationSystem_BL
             {
                 return false;
             }
-           
+
             user.Result.HumanInfo.PersonalID = personalId;
             await _dbRepository.SaveChangesAsync();
 
@@ -167,6 +175,7 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateImageAsync(int id, byte[] picture)
         {
+         
             var user = _dbRepository.GetUserByIdAsync(id);
 
             if (user == null)
@@ -247,9 +256,83 @@ namespace HumanRegistrationSystem_BL
             return user;
         }
 
+        public async Task<UserAccountInfoResponce> GetMapedUserAccount(int id)
+        {
+            var responce = await _dbRepository.GetUserByIdAsync(id);
+
+            var userDto = new UserAccountInfoResponce
+            {
+                UserName = responce.UserName,
+
+                Name = responce.HumanInfo.Name,
+                Surname = responce.HumanInfo.Surname,
+                PersonalID = responce.HumanInfo.PersonalID,
+                PhoneNumber = responce.HumanInfo.PhoneNumber,
+                Email = responce.HumanInfo.Email,
+                AddressDto = new AddressDto
+                {
+                    City = responce.HumanInfo.Address.City,
+                    Street = responce.HumanInfo.Address.Street,
+                    HouseNumber = responce.HumanInfo.Address.HouseNumber,
+                    ApartmentNumber = responce.HumanInfo.Address.ApartmentNumber
+                },
+                Picture = responce.HumanInfo.Picture,
+            };
+            return userDto;
+        }
+
+
         public async Task DeleteUser(UserAccount userAccount)
         {
             await _dbRepository.DeleteUser(userAccount);
+        }
+
+
+
+
+        public async Task<byte[]> ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            using var ms = new MemoryStream();
+            destImage.Save(ms, ImageFormat.Png);
+
+            return ms.ToArray();
+        }
+
+        public async Task<byte[]> FileUpload(IFormFile file, int width, int height)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return null;
+            }
+
+            var memoryStream = new MemoryStream();
+
+            await file.CopyToAsync(memoryStream);
+            var img = Image.FromStream(memoryStream);
+            var imageResized = await ResizeImage(img, width, height);
+
+            return imageResized;
+
         }
     }
 }

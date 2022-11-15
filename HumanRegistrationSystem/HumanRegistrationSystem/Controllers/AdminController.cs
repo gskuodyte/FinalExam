@@ -1,4 +1,5 @@
-﻿using HumanRegistrationSystem.Dto;
+﻿using DTO;
+using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,14 +21,16 @@ namespace HumanRegistrationSystem.Controllers
 
         [HttpGet("{id}")]
 
-        public ActionResult<HumanInfoDto> GetUserById(int id)
+        public async Task<ActionResult<UserAccountInfoResponce>> GetUserById(int id)
         {
 
-            var existingUser = _userAccountService.GetUserById(id);
+            var existingUser = await _userAccountService.GetMapedUserAccount(id);
+          
             if (existingUser == null)
             {
                 return NotFound();
             };
+
 
             return Ok(existingUser);
         }
