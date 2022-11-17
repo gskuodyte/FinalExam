@@ -1,6 +1,4 @@
-﻿
-using System.Drawing;
-using HumanRegistrationSystem.Dto;
+﻿using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -10,8 +10,7 @@ namespace Common.Validation
     {
         public static bool CheckIfNull(object responce)
         {
-            if (string.IsNullOrWhiteSpace(responce.ToString()))  return true; 
-            return false;
+            return string.IsNullOrWhiteSpace(responce.ToString());
         }
     }
 }

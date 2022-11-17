@@ -1,20 +1,18 @@
-﻿
-using System.Drawing;
+﻿using System.Drawing;
 using DTO;
 using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_Domain;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
 namespace HumanRegistrationSystem_BL
 {
     public interface IUserAccountService
     {
-        Task<bool> CreateUserAccountAsync(SignUpDto signUpDto, byte[] Picture);
+        Task<bool> CreateUserAccountAsync(SignUpDto signUpDto, byte[] picture);
         Task<(bool authenticationSuccessful, UserAccount? userAccount)> LoginAsync(string username, string password);
-        Task<UserAccount> GetUserById(int id);
+        //Task<UserAccount> GetUserAccountAsync(int id);
         Task<UserAccountInfoResponce> GetMapedUserAccount(int id);
-        Task DeleteUser(UserAccount userAccount);
+        Task<bool> DeleteUser(int id);
         Task<byte[]> ResizeImage(Image image, int width, int height);
         Task<bool> UpdateUserPersonalId(int id, int personalId);
         Task<bool> UpdateUserName(int id, string name);

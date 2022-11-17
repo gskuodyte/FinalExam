@@ -1,7 +1,5 @@
 ﻿using HumanRegistrationSystem_Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 
 
 namespace HumanRegistrationSystem_DAL
@@ -12,8 +10,6 @@ namespace HumanRegistrationSystem_DAL
         public DbSet<HumanInfo> Humans { get; set; }
         public DbSet<Address> Addresses { get; set; }
         
-        public HumanRegistrationSystemDbContext(DbContextOptions<HumanRegistrationSystemDbContext> options) : base(options) { }  
-
-        
+        public HumanRegistrationSystemDbContext(DbContextOptions<HumanRegistrationSystemDbContext> options) : base(options) { }
     }
 }

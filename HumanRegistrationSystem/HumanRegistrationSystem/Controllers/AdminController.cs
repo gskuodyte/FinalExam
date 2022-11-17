@@ -1,9 +1,9 @@
-﻿using DTO;
-using HumanRegistrationSystem.Dto;
+﻿using System.ComponentModel.DataAnnotations;
+using Common.Validation;
+using DTO;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace HumanRegistrationSystem.Controllers
 {
@@ -25,26 +25,25 @@ namespace HumanRegistrationSystem.Controllers
         {
 
             var existingUser = await _userAccountService.GetMapedUserAccount(id);
-          
-            if (existingUser == null)
+            
+            if (Validation.CheckIfNull(existingUser))
             {
                 return NotFound();
-            };
+            }
 
 
             return Ok(existingUser);
         }
 
         [HttpDelete("{id}")]
-        public  ActionResult DeleteUserById(int id)
+        public async Task<ActionResult> DeleteUserById(int id)
         {
-            var existingUser = _userAccountService.GetUserById(id).Result;
-            if (existingUser == null)
+            if (await _userAccountService.DeleteUser(id))
             {
-                return NotFound();
-            };
-            _userAccountService.DeleteUser(existingUser);
-            return Ok();
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

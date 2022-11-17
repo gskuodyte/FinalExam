@@ -7,7 +7,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using static System.Net.Mime.MediaTypeNames;
+using Common.Validation;
 using Image = System.Drawing.Image;
 using Microsoft.AspNetCore.Http;
 
@@ -43,7 +43,7 @@ namespace HumanRegistrationSystem_BL
                 {
                     Name = signUpDto.Name,
                     Surname = signUpDto.Surname,
-                    PersonalID = signUpDto.PersonalID,
+                    PersonalId = signUpDto.PersonalID,
                     PhoneNumber = signUpDto.PhoneNumber,
                     Email = signUpDto.Email,
                     Picture = picture,
@@ -100,14 +100,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserPersonalId(int id, int personalId)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
+            var user = await _dbRepository.GetUserByIdAsync(id);
 
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.PersonalID = personalId;
+            user!.HumanInfo.PersonalId = personalId;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -115,14 +110,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserName(int id, string name)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Name = name;
+            var user = await _dbRepository.GetUserByIdAsync(id);
+            
+            user!.HumanInfo.Name = name;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -130,14 +120,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserSurname(int id, string surname)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Surname = surname;
+            var user = await _dbRepository.GetUserByIdAsync(id);
+            
+            user!.HumanInfo.Surname = surname;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -145,14 +130,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserPhoneNumber(int id, string phoneNumber)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
+            var user = await _dbRepository.GetUserByIdAsync(id);
 
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.PhoneNumber = phoneNumber;
+            user!.HumanInfo.PhoneNumber = phoneNumber;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -160,14 +140,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserEmail(int id, string email)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
+            var user = await _dbRepository.GetUserByIdAsync(id);
 
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Email = email;
+            user!.HumanInfo.Email = email;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -175,15 +150,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateImageAsync(int id, byte[] picture)
         {
-         
-            var user = _dbRepository.GetUserByIdAsync(id);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Picture = picture;
+            var user = await _dbRepository.GetUserByIdAsync(id);
+            
+            user!.HumanInfo.Picture = picture;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -191,14 +160,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserCityAddress(int id, string city)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Address.City = city;
+            var user = await _dbRepository.GetUserByIdAsync(id);
+            
+            user!.HumanInfo.Address.City = city;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -206,14 +170,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserStreetAddress(int id, string street)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Address.Street = street;
+            var user = await _dbRepository.GetUserByIdAsync(id);
+            
+            user!.HumanInfo.Address.Street = street;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -221,14 +180,9 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserHouseNumberAddress(int id, int houseNumber)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
+            var user = await _dbRepository.GetUserByIdAsync(id);
 
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Address.HouseNumber = houseNumber;
+            user!.HumanInfo.Address.HouseNumber = houseNumber;
             await _dbRepository.SaveChangesAsync();
 
             return true;
@@ -236,25 +190,15 @@ namespace HumanRegistrationSystem_BL
 
         public async Task<bool> UpdateUserApartmentNumberAddress(int id, int apartmentNumber)
         {
-            var user = _dbRepository.GetUserByIdAsync(id);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            user.Result.HumanInfo.Address.ApartmentNumber = apartmentNumber;
+            var user = await _dbRepository.GetUserByIdAsync(id);
+            
+            user!.HumanInfo.Address.ApartmentNumber = apartmentNumber;
             await _dbRepository.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<UserAccount> GetUserById(int id)
-        {
-            var user = await _dbRepository.GetUserByIdAsync(id);
-
-            return user;
-        }
+        
 
         public async Task<UserAccountInfoResponce> GetMapedUserAccount(int id)
         {
@@ -262,11 +206,10 @@ namespace HumanRegistrationSystem_BL
 
             var userDto = new UserAccountInfoResponce
             {
-                UserName = responce.UserName,
-
+                UserName = responce!.UserName,
                 Name = responce.HumanInfo.Name,
                 Surname = responce.HumanInfo.Surname,
-                PersonalID = responce.HumanInfo.PersonalID,
+                PersonalID = responce.HumanInfo.PersonalId,
                 PhoneNumber = responce.HumanInfo.PhoneNumber,
                 Email = responce.HumanInfo.Email,
                 AddressDto = new AddressDto
@@ -281,10 +224,18 @@ namespace HumanRegistrationSystem_BL
             return userDto;
         }
 
+       
 
-        public async Task DeleteUser(UserAccount userAccount)
+        public async Task<bool> DeleteUser(int id)
         {
-            await _dbRepository.DeleteUser(userAccount);
+            var existingUser = await _dbRepository.GetUserByIdAsync(id);
+
+            if (Validation.CheckIfNull(existingUser))
+            {
+                return false;
+            }
+            await _dbRepository.DeleteUser(existingUser);
+            return true;
         }
 
 

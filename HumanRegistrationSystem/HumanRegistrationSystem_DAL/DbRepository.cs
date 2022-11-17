@@ -38,13 +38,6 @@ namespace HumanRegistrationSystem_DAL
             
             await SaveChangesAsync();
         }
-
-
-        //public async Task Update<T>(T item) where T : class
-        //{
-        //    _context.Update(item);
-        //    await SaveChangesAsync();
-        //}
     }
 
 }
