@@ -9,11 +9,12 @@ namespace HumanRegistrationSystem_Domain
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string UserName { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
-        public string Role { get; set; }
+        public string UserName { get; set; } = null!;
+        public byte[] PasswordHash { get; set; } = null!;
+        public byte[] PasswordSalt { get; set; } = null!;
+        public string Role { get; set; } = null!;
+
         [InverseProperty("UserAccount")]
-        public virtual HumanInfo HumanInfo { get; set; }
+        public virtual HumanInfo HumanInfo { get; set; } = null!;
     }
 }

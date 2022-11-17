@@ -26,9 +26,9 @@ namespace HumanRegistrationSystem_DAL
              return _context.SaveChangesAsync();
         }
 
-        public async Task<UserAccount> GetUserByIdAsync(int id)
+        public async Task<UserAccount?> GetUserByIdAsync(int id)
         {
-            return await _context.UserAccounts.Include(h => h.HumanInfo).Include(a => a.HumanInfo.Address).FirstOrDefaultAsync(i => i.Id == id);
+            return (await _context.UserAccounts.Include(h => h.HumanInfo).Include(a => a.HumanInfo.Address).FirstOrDefaultAsync(i => i.Id == id))!;
         }
 
         public async Task DeleteUser(UserAccount userAccount)

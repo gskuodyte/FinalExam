@@ -1,8 +1,6 @@
-﻿
+﻿using Microsoft.AspNetCore.Http;
 
-using Microsoft.AspNetCore.Http;
-
-namespace HumanRegistrationSystem.Dto
+namespace DTO
 {
     public class SignUpDto
     {

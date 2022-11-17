@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Common.Validation;
+﻿using Common.Validation;
 using DTO;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;

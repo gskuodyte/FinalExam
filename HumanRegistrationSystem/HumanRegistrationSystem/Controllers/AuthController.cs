@@ -1,4 +1,4 @@
-﻿using HumanRegistrationSystem.Dto;
+﻿using DTO;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +35,7 @@ namespace HumanRegistrationSystem.Controllers
 
             if (loginSuccess)
             {
-                return Ok(_jwtService.GetJwtToken(account));
+                return Ok(_jwtService.GetJwtToken(account!));
             }
             else
             {

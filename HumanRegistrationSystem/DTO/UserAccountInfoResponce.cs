@@ -1,11 +1,4 @@
-﻿using HumanRegistrationSystem.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DTO
+﻿namespace DTO
 {
     public class UserAccountInfoResponce
     {
@@ -17,7 +10,5 @@ namespace DTO
         public string Email { get; set; }
         public AddressDto AddressDto { get; set; }
         public byte[] Picture { get; set; }
-        
-
     }
 }

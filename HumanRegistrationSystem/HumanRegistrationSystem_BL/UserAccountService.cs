@@ -1,5 +1,4 @@
 ﻿using DTO;
-using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_DAL;
 using HumanRegistrationSystem_Domain;
 using System.Security.Cryptography;
@@ -241,7 +240,7 @@ namespace HumanRegistrationSystem_BL
 
 
 
-        public async Task<byte[]> ResizeImage(Image image, int width, int height)
+        public Task<byte[]> ResizeImage(Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);
             var destImage = new Bitmap(width, height);
@@ -266,7 +265,7 @@ namespace HumanRegistrationSystem_BL
             using var ms = new MemoryStream();
             destImage.Save(ms, ImageFormat.Png);
 
-            return ms.ToArray();
+            return Task.FromResult(ms.ToArray());
         }
 
         public async Task<byte[]> FileUpload(IFormFile file, int width, int height)

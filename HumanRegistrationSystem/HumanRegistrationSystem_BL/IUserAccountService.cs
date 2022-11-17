@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using DTO;
-using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_Domain;
 using Microsoft.AspNetCore.Http;
 
@@ -10,10 +9,8 @@ namespace HumanRegistrationSystem_BL
     {
         Task<bool> CreateUserAccountAsync(SignUpDto signUpDto, byte[] picture);
         Task<(bool authenticationSuccessful, UserAccount? userAccount)> LoginAsync(string username, string password);
-        //Task<UserAccount> GetUserAccountAsync(int id);
         Task<UserAccountInfoResponce> GetMapedUserAccount(int id);
         Task<bool> DeleteUser(int id);
-        Task<byte[]> ResizeImage(Image image, int width, int height);
         Task<bool> UpdateUserPersonalId(int id, int personalId);
         Task<bool> UpdateUserName(int id, string name);
         Task<bool> UpdateUserSurname(int id, string surname);

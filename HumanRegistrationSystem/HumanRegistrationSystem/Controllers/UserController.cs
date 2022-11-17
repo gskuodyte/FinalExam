@@ -1,9 +1,9 @@
 ﻿using Common.Validation;
-using HumanRegistrationSystem.Dto;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using DTO;
 
 namespace HumanRegistrationSystem.Controllers
 {
@@ -90,9 +90,9 @@ namespace HumanRegistrationSystem.Controllers
         [HttpPut("Image")]
         public async Task<ActionResult> UpdateHumanImage([FromForm] ImageUploadRequest request)
         {
-            var image = _userAccountService.FileUpload(request.Image, 200, 200);
+            var image = await _userAccountService.FileUpload(request.Image, 200, 200);
 
-            await _userAccountService.UpdateImageAsync(ClaimId(), image.Result);
+            await _userAccountService.UpdateImageAsync(ClaimId(), image);
 
             return Ok();
         }

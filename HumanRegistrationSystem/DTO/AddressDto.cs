@@ -1,4 +1,4 @@
-﻿namespace HumanRegistrationSystem.Dto
+﻿namespace DTO
 {
     public class AddressDto
     {

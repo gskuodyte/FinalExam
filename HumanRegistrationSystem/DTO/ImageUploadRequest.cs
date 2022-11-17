@@ -1,7 +1,7 @@
 ﻿using Common.Validation;
 using Microsoft.AspNetCore.Http;
 
-namespace HumanRegistrationSystem.Dto
+namespace DTO
 {
     public class ImageUploadRequest
     {
