@@ -61,7 +61,7 @@ namespace HumanRegistrationSystem_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonalID")
+                    b.Property<int>("PersonalId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")

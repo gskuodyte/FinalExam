@@ -1,8 +1,11 @@
-﻿using Common.Validation;
+﻿using System.Drawing;
+using Common.Validation;
 using DTO;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Text;
 
 namespace HumanRegistrationSystem.Controllers
 {
@@ -18,31 +21,56 @@ namespace HumanRegistrationSystem.Controllers
             _userAccountService = userAccountsService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("User{id}")]
 
-        public async Task<ActionResult<UserAccountInfoResponce>> GetUserById(int id)
+        public async Task<ActionResult<UserAccountInfoResponce>> GetUserById(string id)
         {
-
-            var existingUser = await _userAccountService.GetMapedUserAccount(id);
-            
-            if (Validation.CheckIfNull(existingUser))
+            if (string.IsNullOrEmpty(id))
             {
-                return NotFound();
+                return BadRequest("Id can not be null or empty");
             }
 
+            UserAccountInfoResponce existingUser;
+            try
+            {
+                existingUser = await _userAccountService.GetMappedUserAccount(int.Parse(id));
+            }
+            catch (NullReferenceException)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
 
             return Ok(existingUser);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUserById(int id)
+        [HttpGet("User_Picture")]
+        public async Task<ActionResult> GetUserImage([FromQuery] int id)
         {
-            if (await _userAccountService.DeleteUser(id))
-            {
-                return Ok();
-            }
-
-            return BadRequest();
+            var user = await _userAccountService.GetMappedUserAccount(id);
+            
+            return File(user.Picture, "image/jpeg");
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUserById(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("Id can not be null or empty");
+
+            }
+            try
+            {
+                await _userAccountService.DeleteUser(int.Parse(id));
+            }
+            catch (NullReferenceException)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+       
+            return Ok();
+     
+        }
+
     }
 }

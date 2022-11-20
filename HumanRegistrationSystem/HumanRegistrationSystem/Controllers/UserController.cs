@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using DTO;
+using System.Net;
 
 namespace HumanRegistrationSystem.Controllers
 {
@@ -31,16 +32,29 @@ namespace HumanRegistrationSystem.Controllers
 
 
         [HttpPut("PersonalId")]
-        public async Task<ActionResult> UpdateHumanPersonalId([FromQuery] int personalId)
+        public async Task<ActionResult> UpdateHumanPersonalId([FromQuery] string personalId)
         {
-            if (Validation.CheckIfNull(personalId))
+            if (string.IsNullOrEmpty(personalId))
             {
                 return BadRequest("Input was null! try again");
             }
-            await _userAccountService.UpdateUserPersonalId(ClaimId(), personalId);
-            return Ok();
-        }
 
+            bool result;
+            try
+            {
+                result = await _userAccountService.UpdateUserPersonalId(ClaimId(), int.Parse(personalId));
+            }
+            catch (NullReferenceException)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+            if (result)
+            {
+                return Ok();
+            }
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+        
         [HttpPut("Name")]
         public async Task<ActionResult> UpdateHumanName([FromQuery] string name)
         {
@@ -82,7 +96,7 @@ namespace HumanRegistrationSystem.Controllers
             {
                 return BadRequest("Input was null! try again");
             }
-           
+
             await _userAccountService.UpdateUserEmail(ClaimId(), email);
             return Ok();
         }
@@ -141,6 +155,6 @@ namespace HumanRegistrationSystem.Controllers
             return Ok();
         }
 
-        
+
     }
 }

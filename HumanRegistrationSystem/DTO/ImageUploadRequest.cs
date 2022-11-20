@@ -5,7 +5,7 @@ namespace DTO
 {
     public class ImageUploadRequest
     {
-        [MaxFileSize(5 * 1024 * 1024)]
+        [MaxFileSize(5 * 200 * 200)]
         [AllowedExtensions(new[] { ".png", ".jpg" })]
         public IFormFile Image { get; set; }
 

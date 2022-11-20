@@ -76,3 +76,8 @@ C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrat
 C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.HumanRegistrationSystem.props
 C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.HumanRegistrationSystem.props
 C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\bin\Debug\net6.0\AutoFixture.dll
+C:\Users\Greta\Documents\GitHub\FinalExam\HumanRegistrationSystem\HumanRegistrationSystem\bin\Debug\net6.0\Fare.dll

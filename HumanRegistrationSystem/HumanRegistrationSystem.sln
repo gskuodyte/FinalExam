@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{DA6F9680-8817-4B4C-B723-80BF6D4DB724}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Controllers_UniTests", "API_Controllers_UniTests\API_Controllers_UniTests.csproj", "{EBB860C8-2661-44BF-95FC-E62EA01120D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,12 +55,17 @@ Global
 		{DA6F9680-8817-4B4C-B723-80BF6D4DB724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA6F9680-8817-4B4C-B723-80BF6D4DB724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA6F9680-8817-4B4C-B723-80BF6D4DB724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBB860C8-2661-44BF-95FC-E62EA01120D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB860C8-2661-44BF-95FC-E62EA01120D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB860C8-2661-44BF-95FC-E62EA01120D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB860C8-2661-44BF-95FC-E62EA01120D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8797A0D8-3DD8-4B20-8BBE-2B0FF99F8AD1} = {D26C0E45-B4C7-4E53-9595-E6E6495C3EB5}
+		{EBB860C8-2661-44BF-95FC-E62EA01120D2} = {D26C0E45-B4C7-4E53-9595-E6E6495C3EB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {447EA2D7-700D-4DA1-8391-194FEC38291A}

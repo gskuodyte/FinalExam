@@ -9,7 +9,7 @@ namespace HumanRegistrationSystem_BL
     {
         Task<bool> CreateUserAccountAsync(SignUpDto signUpDto, byte[] picture);
         Task<(bool authenticationSuccessful, UserAccount? userAccount)> LoginAsync(string username, string password);
-        Task<UserAccountInfoResponce> GetMapedUserAccount(int id);
+        Task<UserAccountInfoResponce> GetMappedUserAccount(int id);
         Task<bool> DeleteUser(int id);
         Task<bool> UpdateUserPersonalId(int id, int personalId);
         Task<bool> UpdateUserName(int id, string name);
