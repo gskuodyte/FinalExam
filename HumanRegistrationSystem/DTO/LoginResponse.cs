@@ -1,7 +1,6 @@
-﻿namespace DTO
+﻿namespace DTO;
+
+public class LoginResponse
 {
-    public class LoginResponse
-    {
-        public string JwtToken { get; set; }
-    }
+    public string JwtToken { get; set; }
 }

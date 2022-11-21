@@ -1,50 +1,45 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace API_Controllers_UniTests.Common
+namespace API_Controllers_UniTests.Common;
+
+public class ClaimId
 {
-    public class ClaimId
+    private readonly ControllerBase _sut;
+
+    public ClaimId(ControllerBase sut)
     {
-        private readonly ControllerBase _sut;
+        _sut = sut;
+    }
 
-        public ClaimId(ControllerBase sut)
-        {
-            _sut = sut;
-        }
-        public void UserMockRole()
-        {
-            var userMock = new ClaimsPrincipal(new ClaimsIdentity(
-                new[]
-                {
-                    new Claim("UserId", "1"),
-                    new Claim(ClaimTypes.Role, "User")
-                }));
-
-            _sut.ControllerContext = new ControllerContext()
+    public void UserMockRole()
+    {
+        var userMock = new ClaimsPrincipal(new ClaimsIdentity(
+            new[]
             {
-                HttpContext = new DefaultHttpContext { User = userMock }
-            };
-        }
+                new Claim("UserId", "1"),
+                new Claim(ClaimTypes.Role, "User")
+            }));
 
-        public void AdminMockRole()
+        _sut.ControllerContext = new ControllerContext
         {
-            var userMock = new ClaimsPrincipal(new ClaimsIdentity(
-                new[]
-                {
-                    new Claim("UserId", "2"),
-                    new Claim(ClaimTypes.Role, "Admin")
-                }));
+            HttpContext = new DefaultHttpContext { User = userMock }
+        };
+    }
 
-            _sut.ControllerContext = new ControllerContext()
+    public void AdminMockRole()
+    {
+        var userMock = new ClaimsPrincipal(new ClaimsIdentity(
+            new[]
             {
-                HttpContext = new DefaultHttpContext { User = userMock }
-            };
-        }
+                new Claim("UserId", "2"),
+                new Claim(ClaimTypes.Role, "Admin")
+            }));
+
+        _sut.ControllerContext = new ControllerContext
+        {
+            HttpContext = new DefaultHttpContext { User = userMock }
+        };
     }
 }

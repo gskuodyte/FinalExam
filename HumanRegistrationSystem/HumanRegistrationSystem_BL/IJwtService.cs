@@ -1,9 +1,8 @@
 ﻿using HumanRegistrationSystem_Domain;
 
-namespace HumanRegistrationSystem_BL
+namespace HumanRegistrationSystem_BL;
+
+public interface IJwtService
 {
-    public interface IJwtService
-    {
-        string GetJwtToken(UserAccount userAccount);
-    }
+    string GetJwtToken(UserAccount userAccount);
 }

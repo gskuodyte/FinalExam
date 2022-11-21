@@ -1,76 +1,64 @@
-﻿using System.Drawing;
-using Common.Validation;
+﻿using System.Net;
 using DTO;
 using HumanRegistrationSystem_BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Text;
 
-namespace HumanRegistrationSystem.Controllers
+namespace HumanRegistrationSystem.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+[Authorize(Roles = "Admin")]
+public class AdminController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    [Authorize(Roles = "Admin")]
-    public class AdminController : ControllerBase
+    private readonly IUserAccountService _userAccountService;
+
+    public AdminController(IUserAccountService userAccountsService)
     {
-        private readonly IUserAccountService _userAccountService;
-        
-        public AdminController(IUserAccountService userAccountsService)
+        _userAccountService = userAccountsService;
+    }
+
+    [HttpGet("User{id}")]
+    public async Task<ActionResult<UserAccountInfoResponce>> GetUserById(string id)
+    {
+        if (string.IsNullOrEmpty(id)) return BadRequest("Id can not be null or empty");
+
+        UserAccountInfoResponce existingUser;
+        try
         {
-            _userAccountService = userAccountsService;
+            existingUser = await _userAccountService.GetMappedUserAccountAsync(int.Parse(id));
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
         }
 
-        [HttpGet("User{id}")]
+        return Ok(existingUser);
+    }
 
-        public async Task<ActionResult<UserAccountInfoResponce>> GetUserById(string id)
+    [HttpGet("User_Picture")]
+    public async Task<ActionResult> GetUserImage([FromQuery] string id)
+    {
+        if (string.IsNullOrEmpty(id)) return BadRequest("Id can not be null or empty");
+
+        var user = await _userAccountService.GetMappedUserAccountAsync(int.Parse(id));
+
+        return File(user.Picture, "image/jpeg");
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteUserById(string id)
+    {
+        if (string.IsNullOrEmpty(id)) return BadRequest("Id can not be null or empty");
+        try
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return BadRequest("Id can not be null or empty");
-            }
-
-            UserAccountInfoResponce existingUser;
-            try
-            {
-                existingUser = await _userAccountService.GetMappedUserAccount(int.Parse(id));
-            }
-            catch (NullReferenceException)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError);
-            }
-
-            return Ok(existingUser);
+            await _userAccountService.DeleteUserAsync(int.Parse(id));
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
         }
 
-        [HttpGet("User_Picture")]
-        public async Task<ActionResult> GetUserImage([FromQuery] int id)
-        {
-            var user = await _userAccountService.GetMappedUserAccount(id);
-            
-            return File(user.Picture, "image/jpeg");
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUserById(string id)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                return BadRequest("Id can not be null or empty");
-
-            }
-            try
-            {
-                await _userAccountService.DeleteUser(int.Parse(id));
-            }
-            catch (NullReferenceException)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError);
-            }
-       
-            return Ok();
-     
-        }
-
+        return Ok();
     }
 }
