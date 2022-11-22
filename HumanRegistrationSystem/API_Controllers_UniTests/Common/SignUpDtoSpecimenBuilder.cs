@@ -1,35 +1,46 @@
 ﻿using AutoFixture.Kernel;
 using DTO;
+using Microsoft.AspNetCore.Http;
+using Moq;
+using System.Runtime.Versioning;
 
 namespace API_Controllers_UniTests.Common;
-
+[SupportedOSPlatform("windows")]
 public class SignUpDtoSpecimenBuilder : ISpecimenBuilder
 {
+    private readonly Mock<IFormFile> _iFormFileMock;
+    public SignUpDtoSpecimenBuilder()
+    {
+        _iFormFileMock = new Mock<IFormFile>();
+    }
     public object Create(object request, ISpecimenContext context)
     {
         if (request is Type type && type == typeof(SignUpDto))
         {
-            var stream = new MemoryStream();
+            using var stream = new MemoryStream();
+            _iFormFileMock
+                .Setup(f => f.CopyTo(stream));
+
+
             return new SignUpDto
             {
-                UserName = "GSK",
-                Password = "123456",
-                PersonalId = "84651",
-                Name = "",
-                Surname = "eswdfd",
-                PhoneNumber = "54120561651",
-                Email = "greta@gmail.com",
-                Address = new AddressDto
-                {
-                    City = "ergfsa",
-                    Street = "sadfsfd",
-                    HouseNumber = 1,
-                    ApartmentNumber = 10
-                }
-                //Picture = new FormFile(stream, 200, 200, "Counter", ".jpg")
+                UserName = "LoginName",
+                Password = "LoginNamePassword123",
+                PersonalId = "37501050000",
+                Name = "FirstLoginName",
+                Surname = "LastLoginName",
+                Email = "loginname@gmail.com",
+                PhoneNumber = "37069553298",
+                Address = new AddressDto{
+                    City = "Klaipeda",
+                    Street = "Smilteles",
+                    ApartmentNumber = 11,
+                    HouseNumber = 10,
+                },
+                Picture = _iFormFileMock.Object
             };
         }
-
         return new NoSpecimen();
     }
 }
+

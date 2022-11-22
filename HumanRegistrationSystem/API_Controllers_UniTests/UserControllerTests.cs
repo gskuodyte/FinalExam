@@ -22,7 +22,7 @@ public class UserControllerTests
     [Fact]
     public async Task UpdateName_WhenUserIdIsNotValidAndNotAdmin_ReturnsBadRequest()
     {
-        var result = await _sut.UpdateHumanNameAsync(" ");
+        var result = await _sut.UpdateHumanNameAsync("");
         var resultAsBadRequest = result as BadRequestObjectResult;
 
         Assert.Equal(400, resultAsBadRequest.StatusCode);

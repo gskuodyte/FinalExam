@@ -1,5 +1,7 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Security.Claims;
+using System.Xml.Linq;
 using Common.Validation;
 using DTO;
 using HumanRegistrationSystem_BL;
@@ -50,75 +52,170 @@ public class UserController : ControllerBase
     [HttpPut("Name")]
     public async Task<ActionResult> UpdateHumanNameAsync([FromQuery] string name)
     {
-        if (Validation.CheckIfNull(name)) return BadRequest("Input was null! try again");
-        await _userAccountService.UpdateUserNameAsync(ClaimId(), name);
-        return Ok();
+        if (string.IsNullOrEmpty(name)) return BadRequest("Input was null! try again");
+
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserNameAsync(ClaimId(), name);
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("Surname")]
     public async Task<ActionResult> UpdateHumanSurnameAsync([FromQuery] string surname)
     {
-        if (Validation.CheckIfNull(surname)) return BadRequest("Input was null! try again");
-        await _userAccountService.UpdateUserSurnameAsync(ClaimId(), surname);
-        return Ok();
+        if (string.IsNullOrEmpty(surname)) return BadRequest("Input was null! try again");
+
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserSurnameAsync(ClaimId(), surname);
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("PhoneNumber")]
     public async Task<ActionResult> UpdateHumanPhoneNumberAsync([FromQuery] string phoneNumber)
     {
-        if (Validation.CheckIfNull(phoneNumber)) return BadRequest("Input was null! try again");
-        await _userAccountService.UpdateUserPhoneNumberAsync(ClaimId(), phoneNumber);
-        return Ok();
+        if (string.IsNullOrEmpty(phoneNumber)) return BadRequest("Input was null! try again");
+
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserPhoneNumberAsync(ClaimId(), phoneNumber);
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("Email")]
     public async Task<ActionResult> UpdateHumanEmailAsync([FromQuery] string email)
     {
-        if (Validation.CheckIfNull(email)) return BadRequest("Input was null! try again");
+        if (string.IsNullOrEmpty(email)) return BadRequest("Input was null! try again");
 
-        await _userAccountService.UpdateUserEmailAsync(ClaimId(), email);
-        return Ok();
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserEmailAsync(ClaimId(), email);
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("Image")]
     public async Task<ActionResult> UpdateHumanImageAsync([FromForm] ImageUploadRequest request)
     {
-        var image = await _userAccountService.FileUploadAsync(request.Image, 200, 200);
+        bool result;
+        try
+        {
+            var image = await _userAccountService.FileUploadAsync(request.Image, 200, 200);
+            result = await _userAccountService.UpdateImageAsync(ClaimId(), image);
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
 
-        await _userAccountService.UpdateImageAsync(ClaimId(), image);
-
-        return Ok();
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("City")]
     public async Task<ActionResult> UpdateHumanCityAddressAsync([FromQuery] string city)
     {
-        if (Validation.CheckIfNull(city)) return BadRequest("Input was null! try again");
-        await _userAccountService.UpdateUserCityAddressAsync(ClaimId(), city);
-        return Ok();
+        if (string.IsNullOrEmpty(city)) return BadRequest("Input was null! try again");
+
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserCityAddressAsync(ClaimId(), city);
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("Street")]
     public async Task<ActionResult> UpdateHumanStreetAddressAsync([FromQuery] string street)
     {
-        if (Validation.CheckIfNull(street)) return BadRequest("Input was null! try again");
-        await _userAccountService.UpdateUserStreetAddressAsync(ClaimId(), street);
-        return Ok();
+        if (string.IsNullOrEmpty(street)) return BadRequest("Input was null! try again");
+
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserStreetAddressAsync(ClaimId(), street);
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("HouseNumber")]
-    public async Task<ActionResult> UpdateHumanHouseNumberAddressAsync([FromQuery] int houseNumber)
+    public async Task<ActionResult> UpdateHumanHouseNumberAddressAsync([FromQuery] string houseNumber)
     {
-        if (Validation.CheckIfNull(houseNumber)) return BadRequest("Input was null! try again");
-        await _userAccountService.UpdateUserHouseNumberAddressAsync(ClaimId(), houseNumber);
-        return Ok();
+        if (string.IsNullOrEmpty(houseNumber)) return BadRequest("Input was null! try again");
+
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserHouseNumberAddressAsync(ClaimId(), int.Parse(houseNumber));
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 
     [HttpPut("ApartmentNumber")]
-    public async Task<ActionResult> UpdateHumanApartmentNumberAddressAsync([FromQuery] int apartmentNumber)
+    public async Task<ActionResult> UpdateHumanApartmentNumberAddressAsync([FromQuery] string apartmentNumber)
     {
-        if (Validation.CheckIfNull(apartmentNumber)) return BadRequest("Input was null! try again");
-        await _userAccountService.UpdateUserApartmentNumberAddressAsync(ClaimId(), apartmentNumber);
-        return Ok();
+        if (string.IsNullOrEmpty(apartmentNumber)) return BadRequest("Input was null! try again");
+
+        bool result;
+        try
+        {
+            result = await _userAccountService.UpdateUserApartmentNumberAddressAsync(ClaimId(), int.Parse(apartmentNumber)); ;
+        }
+        catch (NullReferenceException)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        if (result) return Ok();
+        return StatusCode((int)HttpStatusCode.InternalServerError);
     }
 }
