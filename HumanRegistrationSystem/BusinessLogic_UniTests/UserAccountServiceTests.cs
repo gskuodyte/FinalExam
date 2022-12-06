@@ -295,6 +295,7 @@ public class UserAccountServiceTests
         var sut = GetNewUser();
         var image = Array.Empty<byte>();
         var data = await sut.CreateUserAccountAsync(CreateSignUpUser(), image);
+
         Assert.True(data);
     }
 
@@ -309,10 +310,8 @@ public class UserAccountServiceTests
     [Fact]
     public async Task GetMappedUserAccount_WhenUserExists()
     {
-
         var sut = GetExistingUser();
         var data = await sut.GetMappedUserAccountAsync(1);
-
         Assert.Equal("Alvydas", data.Name);
     }
 
