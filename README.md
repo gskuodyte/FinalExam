@@ -9,6 +9,6 @@ Task :
 4. Create authentication, authorization using JSON Web token to access the ENDPOINTS by role ;
 5. Create an admin role that can check each user and DELETE.
  
- To check functionality use:
+ To check functionality use :
  
  1. Swagger UI, program do not have FrontEnd application.
