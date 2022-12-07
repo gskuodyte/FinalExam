@@ -12,3 +12,4 @@ Task :
  To check functionality use :
  
  1. Swagger UI, program do not have FrontEnd application.
+ 2. MS SQL for DB check.
